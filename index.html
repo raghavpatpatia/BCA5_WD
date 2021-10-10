@@ -71,5 +71,18 @@
         <li>If any child of<code> n </code>is solvable, then<code> n </code>is solvable.</li>
         <li>If no child of<code> n </code>is solvable, then<code> n </code>is not solvable.</li>
     </ul>
+    <p>Hence, to decide whether any non-leaf node<code> n </code>is solvable (part of a path to a 
+    goal node), all you have to do is test whether any child of<code> n </code>is solvable. This is 
+    done recursively, on each child of<code> n. </code>In the above code, this is done by the lines</p>
+    <p>
+        <code>
+        <pre>
+            for each child c of n {
+                if solve(c) succeeds, return true
+            }
+            return false
+        </pre>   
+        </code>
+    </p>
 </body>
 </html>
