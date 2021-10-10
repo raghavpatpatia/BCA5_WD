@@ -7,9 +7,20 @@
     <h1>Backtracking</h1>
     Copyright &copy;2002 by David Matuszek
     <p>Backtracking is a form of recursion.</p>
-    <p>The usual scenario is that you are faced with a number of options, and you must choose one of these. After you make your choice you will get a new set of options; just what set of options you get depends on what choice you made. This procedure is repeated over and over until you reach a final state. If you made a good sequence of choices, your final state is a <em>goal state</em>; if you didn't, it isn't.</p>
-    <p>Conceptually, you start at the root of a tree; the tree probably has some good leaves and some bad leaves, though it may be that the leaves are all good or all bad. You want to get to a good leaf. At each node, beginning with the root, you choose one of its children to move to, and you keep this up until you get to a leaf.</p>
-    <p>Suppose you get to a bad leaf. You can <em>backtrack</em> to continue the search for a good leaf by revoking your <em>most recent</em> choice, and trying out the next option in that set of options. If you run out of options, revoke the choice that got you here, and try another choice at that node. If you end up at the root with no options left, there are no good leaves to be found.</p>
+    <p>The usual scenario is that you are faced with a number of options, and you
+    must choose one of these. After you make your choice you will get a new set of 
+    options; just what set of options you get depends on what choice you made. This 
+    procedure is repeated over and over until you reach a final state. If you made a 
+    good sequence of choices, your final state is a <em>goal state</em>; if you didn't, it isn't.</p>
+    <p>Conceptually, you start at the root of a tree; the tree probably has some good 
+    leaves and some bad leaves, though it may be that the leaves are all good or all bad. 
+    You want to get to a good leaf. At each node, beginning with the root, you choose one 
+    of its children to move to, and you keep this up until you get to a leaf.</p>
+    <p>Suppose you get to a bad leaf. You can <em>backtrack</em> to continue the 
+    search for a good leaf by revoking your <em>most recent</em> choice, and trying 
+    out the next option in that set of options. If you run out of options, revoke the 
+    choice that got you here, and try another choice at that node. If you end up at the 
+    root with no options left, there are no good leaves to be found.</p>
     <p>This needs an example.</p>
     <center><img src="https://www.cis.upenn.edu/~matuszek/cit594-2012/Pages/backtracking_files/treesearch.gif" alt="Backtracking Image"></center>
     <p>
@@ -25,7 +36,11 @@
             <li>E is good. Congratulations!</li>
         </ol>
     </p>
-    <p>In this example we drew a picture of a tree. The tree is an abstract model of the possible sequences of choices we could make. There is also a data structure called a tree, but usually we don't have a data structure to tell us what choices we have. (If we do have an actual tree data structure, backtracking on it is called <i>depth-first tree searching</i>.)</p>
+    <p>In this example we drew a picture of a tree. The tree is an abstract model 
+    of the possible sequences of choices we could make. There is also a data structure 
+    called a tree, but usually we don't have a data structure to tell us what choices we 
+    have. (If we do have an actual tree data structure, backtracking on it is 
+    called <i>depth-first tree searching</i>.)</p>
     <br>
     <h3>The backtracking algorithm.</h3>
     <p>Here is the algorithm (in pseudocode) for doing backtracking from a given node n:</p>
