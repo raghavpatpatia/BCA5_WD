@@ -440,7 +440,7 @@
         <code>
         <pre>
     boolean explore1(int row, int column, int color) {
-        if (row >= NUM_ROWS) return mapIsOK();
+        if (row >= NUM_ROWS) <b>return mapIsOK()</b>;
         map[row][column] = color;
         for (int nextColor = RED; nextColor <= BLUE; nextColor++) {
             int[] next = nextRowAndColumn(row, column);
@@ -450,6 +450,88 @@
     }
         </pre>
         </code>
+    </p>
+    <p>
+        And here's the code for method 2:
+    </p>
+    <p>
+        <code>
+        <pre>
+    boolean explore2(int row, int column, int color) {
+        if (row >= NUM_ROWS) <b>return true;
+        if (okToColor(row, column, color)) {</b>
+            map[row][column] = color;
+            for (int nextColor = RED; nextColor <= BLUE; nextColor++) {
+                int[] next = nextRowAndColumn(row, column);
+                if (explore2(next[0], next[1], nextColor)) return true;
+            }
+        }
+        return false;
+    }
+        </pre>
+        </code>
+    </p>
+    <p>
+        Those appear pretty similar, and you might think they are equally good. 
+        However, the timing information suggests otherwise:
+    </p>
+    <table align="center" border="1" cellpadding="4">
+        <tbody><tr bgcolor="#cccccc"> 
+          <td bgcolor="#ffffff">&nbsp;</td>
+          <td>2 by 3 map</td>
+          <td>3 by 3 map</td>
+          <td>3 by 4 map</td>
+        </tr>
+        <tr>
+          <td bgcolor="#cccccc">Method 1:</td>
+          <td>60 ms.</td>
+          <td>940 ms.</td>
+          <td>60530 ms. (1 minute)</td>
+        </tr>
+        <tr>
+          <td bgcolor="#cccccc">Method 2:</td>
+          <td>0ms.</td>
+          <td>0 ms.</td>
+          <td>0 ms</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+        The zeros in the above table indicate times too short to measure 
+        (less than 1 millisecond). Why this huge difference? Either of these methods 
+        <em>could</em> have exponential growth. Eliminating a node automatically eliminates 
+        all of its descendents, and this will often prevent exponential growth. Conversely, 
+        by waiting to check until a leaf node is reached, exponential growth is practically guaranteed. 
+        <b><i> If there is any way to eliminate children (reduce the set of choices), do so!</i></b>
+    </p>
+    <br>
+    <h3>
+        Debugging techniques
+    </h3>
+    <p>
+        Often our first try at a program doesn't work, and we need to debug it. 
+        Debuggers are helpful, but sometimes we need to fall back on inserting print 
+        statements. There are some simple tricks to making effective use of print statements. 
+        These tricks can be applied to any program, but are especially useful when you are 
+        trying to debug recursive routines.
+    </p>
+    <p>
+        <b>Trick #1: Indent when you print method entries and exits.</b> Often, the best 
+        debugging technique is to print every method call and return (or at least the most 
+        important ones). You probably want to print, for each method, what parameters it came 
+        in with, and what value it leaves with. However, if you just print a long list of 
+        these, it's hard to match up method exits with their corresponding entries. 
+        Indenting to show the level of nesting can help.
+    </p>
+    <p>
+        <b>Trick #2: Use specialized print methods for debugging.</b> Don't clutter up 
+        your actual code more than you must. Also, remember that code inserted for 
+        debugging purposes can itself contain bugs, or (in the worst case) can affect 
+        the results, so be very careful with it.
+    </p>
+    <p>
+        Here's our debugging code. For this trivial program, there's 
+        almost more debugging code than actual code, but in larger programs the proportions will be better.
     </p>
 </body>
 </html>
